@@ -17,7 +17,6 @@ const handleLogout = async (req, res) => {
     // Borrar el token en la BD
     foundUser.refreshToken = '';
     const resultado = await foundUser.save();
-    console.log(resultado);
 
     res.clearCookie('jwt', { httpOnly: true,sameSite: 'none', secure: true }); // agregar secure: true en produccion
     res.sendStatus(204);

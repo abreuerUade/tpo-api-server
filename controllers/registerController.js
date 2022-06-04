@@ -16,8 +16,6 @@ const handleNewUser = async (req, res) => {
             "email": email, 
             "pwd": hashedPwd
         });
-        
-        console.log(resultado);
 
         res.status(201).json({'success': 'success'})
 

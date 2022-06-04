@@ -19,7 +19,7 @@ const handleLogin = async (req, res) => {
         const accessToken = jwt.sign(
             {"email": foundUser.email},
             process.env.ACCESS_TOKEN_SECRET,
-            {expiresIn: '300s'}
+            {expiresIn: '3000s'}
         )
 
         const refreshToken = jwt.sign(
@@ -30,7 +30,6 @@ const handleLogin = async (req, res) => {
         
         foundUser.refreshToken = refreshToken;
         const resultado = await foundUser.save();
-        console.log(resultado);
 
         res.cookie('jwt', refreshToken, { 
             httpOnly: true, 

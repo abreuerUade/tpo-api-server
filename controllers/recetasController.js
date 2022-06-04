@@ -37,7 +37,7 @@ const createReceta = async (req, res) => {
 }
 
 const editReceta = async (req, res) => {
-    if(!req?.body?.id){
+    if(!req?.body?._id){
         return res.status(400).json({ 'message': 'Tiene que haber id'});
     }
 
@@ -45,7 +45,7 @@ const editReceta = async (req, res) => {
     if(!receta){
         return res.status(204).json({ 'message': 'No existe para editar'});
     }
-    if(req.body?.name) receta.nombre = req.body.nombre;
+    if(req.body?.name) receta.name = req.body.name;
     if(req.body?.creator) receta.creator = req.body.creator;
 
     const resultado = await receta.save();
@@ -54,7 +54,7 @@ const editReceta = async (req, res) => {
 }
 
 const deleteReceta = async (req, res) => {
-    if(!req?.body?.id){
+    if(!req?.body?._id){
         return res.status(400).json({ 'message': 'Tiene que haber id'});
     }
     

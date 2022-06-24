@@ -2,7 +2,12 @@ const User = require('../model/User');
 const bcrypt = require ('bcrypt');
 
 const handleNewUser = async (req, res) => {
-    const { email, pwd } = req.body;
+    const { firstName, 
+        lastName, 
+        phone, 
+        profilePic,
+        email, 
+        pwd } = req.body;
 
     if (!email || !pwd) return res.status(500).json({'message': 'User y pwd required'}) 
 
@@ -12,7 +17,11 @@ const handleNewUser = async (req, res) => {
     try{
         const hashedPwd = await bcrypt.hash(pwd, 10);
          
-        const resultado = await User.create({ 
+        const resultado = await User.create({
+            "firstName": firstName,
+            "lastName": lastName,
+            "phone": phone,
+            "profilePic": profilePic,
             "email": email, 
             "pwd": hashedPwd
         });

@@ -8,17 +8,17 @@ const handleLogout = async (req, res) => {
     if (!cookies?.jwt) return res.sendStatus(204); //204 =  Sin contenido  
     const refreshToken = cookies.jwt;
 
-    const foundUser = await User.findOne({ refreshToken }).exec();
-
+    const foundUser = await User.findOne({ refreshToken: refreshToken }).exec();
+    console.log(foundUser)
     if(!foundUser)  {
-        res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true})
+        res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', }) //secure: true
         return res.sendStatus(204); 
     }
     // Borrar el token en la BD
     foundUser.refreshToken = '';
     const resultado = await foundUser.save();
-
-    res.clearCookie('jwt', { httpOnly: true,sameSite: 'none', secure: true }); // agregar secure: true en produccion
+    console.log(foundUser)
+    res.clearCookie('jwt', { httpOnly: true, sameSite: 'none'}); // agregar secure: true en produccion
     res.sendStatus(204);
 
 }

@@ -9,8 +9,8 @@ router.route('/')
     .put(recetaController.editReceta)
     .delete(recetaController.deleteReceta);
 
-    router.route('/:id')
-        .get(recetaController.getReceta)
+router.route('/:id')
+    .get(recetaController.getReceta)
 
 
 

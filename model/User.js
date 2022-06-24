@@ -11,11 +11,11 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    phone: {
+    profilePic: {
         type: String,
         required: true
     },
-    profilePic: {
+    phone: {
         type: String,
         required: true
     },

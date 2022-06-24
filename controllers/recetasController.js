@@ -1,3 +1,4 @@
+const { obj } = require('../model/Recipe');
 const Recipe = require('../model/Recipe');
 const User = require('../model/User');
 
@@ -35,9 +36,7 @@ const createReceta = async (req, res) => {
         description: req.body.description
 
     }
-
-    
-
+        
         try {
             user.recipes.push(newRecipe);
             const resultado = await user.save();
@@ -72,12 +71,10 @@ const deleteReceta = async (req, res) => {
         return res.status(400).json({ 'message': 'Tiene que haber id'});
     }
     
-    const receta = await Recipe.findOne({ _id: req.body._id}).exec();
-    if(!receta){
-        return res.status(204).json({ 'message': 'No existe para editar'});
-    }
-
-    const resultado = await receta.deleteOne({ _id: req.body._id});
+    let user = await User.findOne({ email: req.User}).exec();
+    user.recipes = user.recipes.filter(obj => {return obj._id != req.body._id });
+    
+    const resultado = await user.save();
     res.send(resultado);
 }
 

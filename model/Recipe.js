@@ -26,6 +26,10 @@ const recipeSchema = new Schema({
         type: [String],
         required: true
     },
+    puntaje:{
+        type: Number,
+        default:0
+    } 
 
 })
 

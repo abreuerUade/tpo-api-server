@@ -42,7 +42,7 @@ const createReceta = async (req, res) => {
             user.recipes.push(newRecipe);
             const resultado = await user.save();
             return res.status(200).json({ 'message': 'funca'});
-            res.json(resultado);
+            
         } catch (error) {
             console.log(error);
         }
@@ -54,23 +54,27 @@ const editReceta = async (req, res) => {
     if(!req?.body?._id){
         return res.status(400).json({ 'message': 'Tiene que haber id'});
     }
-
     let user = await User.findOne({ email: req.User}).exec();
+    const oldReceta = user.recipes.filter(obj => {return obj._id === req.body._id });
+    const newRecipe = {
+        name: req.body.name,
+        creator: req.body.creator,
+        category: req.body.category,
+        difficulty: req.body.difficulty,
+        images: req.body.images,
+        ingredients: req.body.ingredients,
+        description: req.body.description,
+        puntaje: oldReceta.puntaje
 
-    receta = user.recipes.filter(obj => {return obj._id === req.body._id });
-    if(!receta){
-        return res.status(204).json({ 'message': 'No existe para editar'});
     }
 
-    if(req.body?.name) receta.name = req.body.name;
-    if(req.body?.creator) receta.creator = req.body.creator;
-    if(req.body?.creator) receta.creator = req.body.creator;
-    if(req.body?.creator) receta.creator = req.body.creator;
-    if(req.body?.creator) receta.creator = req.body.creator;
-    if(req.body?.creator) receta.creator = req.body.creator;
+    
+    user.recipes = user.recipes.filter(obj => {return obj._id != req.body._id });
 
-    const resultado = await receta.save();
-    res.send(resultado);
+    user.recipes.push(newRecipe);
+    const resultado = await user.save();
+    return res.status(200).json({ 'message': 'funca'});
+    
 
 }
 

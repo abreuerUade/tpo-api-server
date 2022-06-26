@@ -19,7 +19,7 @@ app.use('/register', require('./routes/register.js'))
 app.use('/auth', require('./routes/auth.js'))
 app.use('/refresh', require('./routes/refresh.js'))
 app.use('/logout', require('./routes/logout.js'))
-//app.use(verifyJWT)
+app.use(verifyJWT)
 app.use('/recetas', require('./routes/api/recetas.js'))
 
 mongoose.connection.once('open', () => {

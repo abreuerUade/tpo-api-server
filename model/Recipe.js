@@ -29,6 +29,11 @@ const recipeSchema = new Schema({
     puntaje:{
         type: Number,
         default:0
+    },
+    fechaCreacion:{
+        type: Date,
+        default: new Date(),
+        immutable: true
     } 
 
 })

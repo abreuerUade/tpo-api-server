@@ -1,4 +1,4 @@
-const { cloudinary } = require('..utils/cloudinary.js')
+const { cloudinary } = require('../utils/cloudinary.js');
 
 const uploadUserImg = async (req,res) => {
     try {
@@ -11,3 +11,5 @@ const uploadUserImg = async (req,res) => {
         res.status(500).json({err:'Algo salio MUY mal'})
     }
 }
+
+module.exports = {uploadUserImg};

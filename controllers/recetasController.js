@@ -16,7 +16,7 @@ const getReceta = async (req,res) => {
 }   
  
 const getAllRecetas = async (req, res) => {
-    const recetas = await User.aggregate([{$unwind:"$recipes"}, {$project:{ _id:1, firstName:1, lastName:1, profilePic:1, recipes:1}}])
+    const recetas = await User.aggregate([{$unwind:"$recipes"}, {$project:{ _id:1, firstName:1, lastName:1, profilePic:1, email:1, recipes:1}}])
     
     if(!recetas) return res.status(204).json({ 'message': 'No hay recetas'});
     res.json(recetas);
@@ -32,7 +32,6 @@ const createReceta = async (req, res) => {
     
     const newRecipe = {
         name: req.body.name,
-        creator: req.body.creator,
         category: req.body.category,
         difficulty: req.body.difficulty,
         images: req.body.images,
@@ -42,6 +41,7 @@ const createReceta = async (req, res) => {
     }
     
         try {
+            console.log(req.User);
             user.recipes.push(newRecipe);
             await user.save();
             
@@ -63,7 +63,6 @@ const editReceta = async (req, res) => {
     const oldReceta = user.recipes.filter(obj => {return obj._id === req.body._id });
     const newRecipe = {
         name: req.body.name,
-        creator: req.body.creator,
         category: req.body.category,
         difficulty: req.body.difficulty,
         images: req.body.images,

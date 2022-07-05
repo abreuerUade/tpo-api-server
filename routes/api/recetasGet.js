@@ -4,11 +4,10 @@ const recetaController = require ('../../controllers/recetasController')
 
 
 router.route('/')
-    
-    .post(recetaController.createReceta)      
-    .put(recetaController.editReceta)
-    .delete(recetaController.deleteReceta);
+    .get(recetaController.getAllRecetas)
 
+router.route('/:id')
+    .get(recetaController.getReceta)
 
 
 

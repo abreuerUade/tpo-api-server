@@ -11,20 +11,28 @@ const sendMail = async (req,res) => {
         host: "smtp.ethereal.email",
         port: 587,
         secure: false, 
+        service: 'Ethereal',
         auth: {
             user: 'hillard.nolan62@ethereal.email', 
             pass: 'uJkNEfTT23EaqwsAVW', 
         },
     });
+
+
     
     console.log(req.body.email);
     let info = await transporter.sendMail({
-        from: 'App-Ettite', // sender address
-        to: 'req.body.email', // list of receivers
+        from: 'hillard.nolan62@ethereal.email', // sender address
+        to: req.body.email, // list of receivers
         subject: "Recupero de contraseña", // Subject line
-        
-        text: "Holitas" //await readFile('./public/mail.html', 'utf8')
+        text: "Holitas", //await readFile('./public/mail.html', 'utf8'),
+        envelope: {
+            from: 'hillard.nolan62@ethereal.email', // used as MAIL FROM: address for SMTP
+            to: req.body.email
+        }
       });
+
+      res.status(200).json({"msg": "funca joya"})
 
       console.log("Message sent: %s", info.messageId);
 

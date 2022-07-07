@@ -8,13 +8,13 @@ const sendMail = async (req,res) => {
 
     //const file = await fs.readFile('../public/mail.html', 'utf8')
     let transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false, 
-        service: 'Ethereal',
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true, 
+        service: 'Gmail',
         auth: {
-            user: 'hillard.nolan62@ethereal.email', 
-            pass: 'uJkNEfTT23EaqwsAVW', 
+            user: 'englishmissirene@gmail.com', 
+            pass: 'jabernwakrlskqot', 
         },
     });
 
@@ -22,12 +22,12 @@ const sendMail = async (req,res) => {
     
     console.log(req.body.email);
     let info = await transporter.sendMail({
-        from: 'hillard.nolan62@ethereal.email', // sender address
+        from: '"App-Etite!" <service@app-ettite.com>', // sender address
         to: req.body.email, // list of receivers
         subject: "Recupero de contraseña", // Subject line
-        text: "Holitas", //await readFile('./public/mail.html', 'utf8'),
+        html: await readFile('./public/mail.html', 'utf8'),
         envelope: {
-            from: 'hillard.nolan62@ethereal.email', // used as MAIL FROM: address for SMTP
+            from: '"App-Ettite!"', // used as MAIL FROM: address for SMTP
             to: req.body.email
         }
       });

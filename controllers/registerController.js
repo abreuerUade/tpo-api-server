@@ -23,7 +23,7 @@ const handleNewUser = async (req, res) => {
             "phone": phone,
             "profilePic": profilePic,
             "email": email, 
-            "pwd": hashedPwd
+            "pwd": hashedPwd 
         });
 
         res.status(201).json({'success': 'success'})

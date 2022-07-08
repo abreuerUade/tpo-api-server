@@ -8,9 +8,15 @@ const resetPass = async (req, res) => {
     try {
         const hashedPwd = await bcrypt.hash(pwd, 10);
 
-        const rta = User.findOneAndUpdate({ email: email }, { pwd: hashedPwd}).exec()
-        
-        res.status(201).json({'success': 'success'})
+        const duplicado = User.findOneAndUpdate({ email: email }, { pwd: hashedPwd}).exec()
+        if (duplicate) 
+            {return res.sendStatus(409);
+        }
+        else {
+            return res.status(201).json({'success': 'success'})
+
+        }
+
     } catch (error) {
         console.error(error);
     }

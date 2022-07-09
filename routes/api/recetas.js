@@ -10,8 +10,5 @@ router.route('/')
     .delete(recetaController.deleteReceta);
 
 
-
-
-
 module.exports = router; 
 

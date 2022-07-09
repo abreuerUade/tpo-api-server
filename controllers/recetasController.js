@@ -6,13 +6,12 @@ const getReceta = async (req,res) => {
     if(!req?.params?.id){
         return res.status(400).json({ 'message': 'Poner datos'});
     }
+    
+    const recetas = await User.aggregate([{$unwind:"$recipes"}, {$project:{ _id:1, firstName:1, lastName:1, profilePic:1, email:1, recipes:1}}])
+    const receta = recetas.filter(obj =>  obj.recipes._id == req.params.id );
+    
 
-    const receta = await Recipe.findOne({ _id: req.params.id}).exec();
-    if(!receta){
-        return res.status(204).json({ 'message': 'No existe para editar'});
-    }
-
-    res.json(receta)
+    res.send(receta);
 }   
  
 const getAllRecetas = async (req, res) => {

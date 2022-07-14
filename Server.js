@@ -26,6 +26,7 @@ app.use('/resetPassword', require('./routes/resetPass.js'))
 app.use(verifyJWT)
 app.use('/recetas', require('./routes/api/recetas.js'))
 app.use('/recetaImg', require('./routes/api/recipeImg.js'))
+app.use('/user', require('./routes/user.js'))
 
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB')
